@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Loading a custom model in ThreeJS</title>
+		<style>
+			body { margin: 0; }
+            canvas { display: block; }
+		</style>
+	</head>
+	<body>
+		<script type="module">
+            import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js'
+            import { GLTFLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/GLTFLoader.js'
+            import { OrbitControls } from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/OrbitControls.js'
+            
+            const loader = new GLTFLoader();
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x008080);
+            const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight);
+
+            document.body.appendChild (renderer.domElement);
+
+            const geometry = new THREE.BoxGeometry();
+            const material = new THREE.MeshBasicMaterial( {color: 0x00FF00})
+
+            const cube = new THREE.Mesh( geometry, material);
+            //scene.add(cube);
+
+            const controls = new OrbitControls( camera, renderer.domElement )
+
+            camera.position.z = 5;
+
+            loader.load( '3d/model.glb', function ( gltf ) {
+                var model = gltf.scene
+
+                model.traverse((o) => {
+                    if(o.isMesh) {
+                        o.material = material;
+                    }
+                })
+
+                scene.add( gltf.scene );
+            }, undefined, function ( error ) {
+                console.error( error );
+            } );
+
+            function animate() {
+                requestAnimationFrame ( animate );
+
+                //we can manipulate mesh to animate it.
+                cube.rotation.x += 0.01;
+                cube.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+            animate();
+		</script>
+	</body>
+</html>

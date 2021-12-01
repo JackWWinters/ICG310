@@ -1,0 +1,60 @@
+h1 {
+    color: blue;
+    margin: 0;
+}
+
+h3 {
+    margin: 0;
+    opacity: 0;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+nav ul {
+    display: flex;
+    padding: 0px;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    background-color: #6897bb;
+    color: black;
+    margin-right: 5px;
+}
+
+.home {
+    cursor: progress;
+}
+
+.about {
+    cursor: zoom-in;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.hello-card {
+    border: 1px solid black;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    background: #dbf1f2;
+}
+
+.mask {
+    height: 2.5em;
+    overflow: hidden;
+}
